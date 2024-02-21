@@ -6,7 +6,7 @@ public class Ball : MonoBehaviour
 {
 
     Rigidbody2D rb;
-    float speed = 2.5f;
+    float speed = 8f;
 
     // Start is called before the first frame update
     void Start()
@@ -36,12 +36,6 @@ public class Ball : MonoBehaviour
         {
             // Increases score
             GameManager.score++;
-        }
-
-        // Changes speed every 10 points
-        if(GameManager.score % 10 == 0)
-        {
-            Debug.Log("Changed Speed");
         }
     }
 }
