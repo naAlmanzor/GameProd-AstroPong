@@ -6,7 +6,7 @@ public class Ball : MonoBehaviour
 {
 
     Rigidbody2D rb;
-    float speed = 8f;
+    float speed = 2f; 
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +26,7 @@ public class Ball : MonoBehaviour
     private IEnumerator WaitToStart()
     {
         yield return new WaitForSeconds(1.5f);
-        rb.velocity = -transform.up * speed;
+        rb.velocity = new Vector2(0, -speed);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -36,6 +36,15 @@ public class Ball : MonoBehaviour
         {
             // Increases score
             GameManager.score++;
+            Debug.Log(speed);
+        }
+
+        // Increases speed every 5 points if score is greater than 0, 
+        // checks if speed is more than 7.5
+        if(GameManager.score % 5 == 0 && GameManager.score > 0 && speed < 7.5f)
+        {   
+            speed += 0.5f;
+            rb.velocity = new Vector2(0, -speed);
         }
     }
 }
