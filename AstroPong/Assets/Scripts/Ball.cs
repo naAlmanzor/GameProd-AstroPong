@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour
 {
@@ -36,7 +37,13 @@ public class Ball : MonoBehaviour
         {
             // Increases score
             GameManager.score++;
-            Debug.Log(speed);
+            // Debug.Log(speed);
+        }
+
+        if(collision.gameObject.CompareTag("Restart"))
+        {
+            Scene currentScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(currentScene.buildIndex);
         }
 
         // Increases speed every 5 points if score is greater than 0, 
