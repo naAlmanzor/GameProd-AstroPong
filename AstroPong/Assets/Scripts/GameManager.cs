@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public TMP_Text scoreText;
     public static int score = 0;
+    public static int highScore;
     
     [SerializeField]
     public static int playerHealth = 3;
@@ -25,6 +26,11 @@ public class GameManager : MonoBehaviour
     {
         scoreText.SetText(score.ToString());
         PlayerHealth();
+
+        if (score > highScore)
+        {
+            highScore = score;
+        }
     }
 
     private void PlayerHealth()

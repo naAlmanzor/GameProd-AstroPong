@@ -9,7 +9,7 @@ public class Ball : MonoBehaviour
 
     Rigidbody2D rb;
     float speed = 2f;
-    
+    MenuManager menuUI;
 
     // Start is called before the first frame update
     void Start()
@@ -57,7 +57,6 @@ public class Ball : MonoBehaviour
             
             else
             {
-                Debug.Log("0 Lives");
                 SceneManager.LoadScene(0);
             }
         }
