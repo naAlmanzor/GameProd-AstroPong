@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,7 +8,8 @@ public class Ball : MonoBehaviour
 {
 
     Rigidbody2D rb;
-    float speed = 2f; 
+    float speed = 2f;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +25,7 @@ public class Ball : MonoBehaviour
     {
     }
 
+
     // Waits 1.5 seconds before starting game
     private IEnumerator WaitToStart()
     {
@@ -36,14 +39,27 @@ public class Ball : MonoBehaviour
         if(collision.gameObject.CompareTag("Paddle"))
         {
             // Increases score
-            GameManager.score++;
+            GameManager.score++; 
             // Debug.Log(speed);
+            
         }
 
         if(collision.gameObject.CompareTag("Restart"))
         {
+            GameManager.playerHealth-=1;
+            Debug.Log(GameManager.playerHealth);
             Scene currentScene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(currentScene.buildIndex);
+            
+            if(GameManager.playerHealth != 0)
+            {
+                SceneManager.LoadScene(currentScene.buildIndex);
+            }
+            
+            else
+            {
+                Debug.Log("0 Lives");
+                SceneManager.LoadScene(0);
+            }
         }
 
         // Increases speed every 5 points if score is greater than 0, 
@@ -51,7 +67,16 @@ public class Ball : MonoBehaviour
         if(GameManager.score % 5 == 0 && GameManager.score > 0 && speed < 7.5f)
         {   
             speed += 0.5f;
-            rb.velocity = new Vector2(0, -speed);
+
+            if(transform.position.y < 0)
+            {
+                rb.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
+            }
+
+            if(transform.position.y > 0)
+            {
+                rb.AddForce(Vector2.down * speed, ForceMode2D.Impulse);
+            }
         }
     }
 }
