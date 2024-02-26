@@ -1,28 +1,71 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //NOTE: System.Numerics is removed for Vector2 lines of code to function
 public class Asteroid : MonoBehaviour
 {
-  //Referencing this: https://www.youtube.com/watch?v=wzQ9Xn406wc
   //Set starting asteroid size
-  public int size = 3;
+  public float size;
+  public float speed;
+  public float minSize;
+  public float maxSize;
+  public float maxLifeTime;
 
+  [SerializeField] Sprite[] asteroidSprites;
+  public SpriteRenderer asteroidSprite;
+  private Rigidbody2D rb;
 
-  private void Start()
+  void Awake()
   {
-    //Scale based on the size
-    transform.localScale = 0.5f * size * Vector3.one;
+    asteroidSprite = GetComponent<SpriteRenderer>(); 
+    rb = GetComponent<Rigidbody2D>();
+  }
 
-    //Applies Movement, bigger = slower smaller = faster
-    Rigidbody2D rb = GetComponent<Rigidbody2D>();
-    Vector2 direction = new Vector2(Random.value, Random.value).normalized;
-    float spawnSpeed = Random.Range(4f - size, 5f - size);
-    rb.AddForce(direction * spawnSpeed, ForceMode2D.Impulse);
+  void Start()
+  { 
+    asteroidSprite.sprite = asteroidSprites[Random.Range(0,asteroidSprites.Length)];
+    // asteroidPolygon = asteroids[randomIndex].GetComponent<PolygonCollider2D>();
+    this.transform.eulerAngles = new Vector3(0, 0, Random.value * 360f);
+    this.transform.localScale = Vector3.one * this.size;
 
-    //Register creation
-    // GameManager.asteroidCount += 1;
+    rb.mass = this.size;
+  }
+
+  public void SetTrajectory(Vector2 direction)
+  {
+    rb.AddForce(direction*this.speed);
+
+    Destroy(this.gameObject, this.maxLifeTime);
+  }
+
+  private void OnCollisionEnter2D(Collision2D collision)
+  {
+    if(collision.gameObject.CompareTag("Paddle"))
+    {
+      Destroy(this.gameObject);
+    }
+
+    if(collision.gameObject.CompareTag("Ball"))
+    {
+      GameManager.playerHealth-=1;
+      Debug.Log(GameManager.playerHealth);
+      Scene currentScene = SceneManager.GetActiveScene();
+
+      Destroy(this.gameObject);
+      
+      if(GameManager.playerHealth != 0)
+      {
+        SceneManager.LoadScene(currentScene.buildIndex);
+      }
+      
+      else
+      {
+        SceneManager.LoadScene(0);
+      }
+    }
   }
 
 }

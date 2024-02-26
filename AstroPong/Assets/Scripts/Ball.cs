@@ -44,6 +44,11 @@ public class Ball : MonoBehaviour
             
         }
 
+        if(collision.gameObject.CompareTag("Asteroid"))
+        {
+            Destroy(this.gameObject);
+        }
+
         if(collision.gameObject.CompareTag("Restart"))
         {
             GameManager.playerHealth-=1;

@@ -6,16 +6,18 @@ TagManager:
   tags:
   - Paddle
   - Restart
+  - Asteroid
+  - Ball
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Asteroid
+  - Boundary
+  - Ball
   - 
   - 
   - 
