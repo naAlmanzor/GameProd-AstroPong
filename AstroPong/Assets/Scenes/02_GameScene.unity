@@ -228,7 +228,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 2114649162}
-  asteroidPrefab: {fileID: 0}
   playerLives:
   - {fileID: 948378596}
   - {fileID: 49240935}
@@ -425,7 +424,6 @@ MonoBehaviour:
   trajectoryVariance: 10
   spawnRate: 5
   spawnDistance: 20
-  spawnAmount: 2
 --- !u!4 &442706228
 Transform:
   m_ObjectHideFlags: 0

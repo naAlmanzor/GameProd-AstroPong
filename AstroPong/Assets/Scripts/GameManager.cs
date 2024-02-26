@@ -10,10 +10,6 @@ public class GameManager : MonoBehaviour
   public TMP_Text scoreText;
   public static int score = 0;
   public static int highScore;
-
-  [SerializeField] private Asteroid asteroidPrefab;
-
-  [SerializeField]
   public static int playerHealth = 3;
   public Image[] playerLives;
   public Sprite fullLives;

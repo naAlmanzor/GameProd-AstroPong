@@ -9,7 +9,7 @@ public class AsteroidSpawner : MonoBehaviour
     public float trajectoryVariance; // Trajectory for asteroid spawns
     public float spawnRate; // Delay between each spawn
     public float spawnDistance; // Distance between
-    public float spawnAmount; // Amount of spawns
+    static float spawnAmount = 1; // Amount of spawns
     private bool isDone = false;
     private float moduloScore;
 
@@ -24,7 +24,7 @@ public class AsteroidSpawner : MonoBehaviour
     void Update()
     {
         // Checks score and bool. Also checks if spawn amount is less than 5 
-       if(!isDone && GameManager.score > 0 && GameManager.score % 10 == 0 && spawnAmount < 5)
+       if(!isDone && GameManager.score > 0 && GameManager.score % 3 == 0 && spawnAmount < 5)
        {
             StartCoroutine(Score());
             isDone = true;
