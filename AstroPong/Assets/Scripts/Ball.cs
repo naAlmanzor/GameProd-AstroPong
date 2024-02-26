@@ -68,7 +68,7 @@ public class Ball : MonoBehaviour
 
         // Increases speed every 5 points if score is greater than 0, 
         // checks if speed is more than 7.5
-        if(GameManager.score % 5 == 0 && GameManager.score > 0 && speed < 7.5f)
+        if(GameManager.score % 5 == 0 && GameManager.score > 0 && speed < 6f)
         {   
             speed += 0.5f;
 

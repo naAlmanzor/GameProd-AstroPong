@@ -425,7 +425,7 @@ MonoBehaviour:
   trajectoryVariance: 10
   spawnRate: 5
   spawnDistance: 20
-  spawnAmount: 1
+  spawnAmount: 2
 --- !u!4 &442706228
 Transform:
   m_ObjectHideFlags: 0
