@@ -5115,19 +5115,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 273e93a5ceb8dcc458ab59a952617c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 2114649162}
-  highScoreText: {fileID: 875753356}
-  playerLives:
+  _scoreText: {fileID: 2114649162}
+  _highscoreText: {fileID: 875753356}
+  _playerLives:
   - {fileID: 948378596}
   - {fileID: 49240935}
   - {fileID: 462966187}
-  fullLives: {fileID: 21300000, guid: a86f232ee894381419f299b216114c71, type: 3}
-  emptyLives: {fileID: 21300000, guid: 74dcb1c7c1d62674a9b9dba23e385ddb, type: 3}
-  prompt: {fileID: 877339351}
-  explosion: {fileID: 90198452}
+  _fullLives: {fileID: 21300000, guid: a86f232ee894381419f299b216114c71, type: 3}
+  _emptyLives: {fileID: 21300000, guid: 74dcb1c7c1d62674a9b9dba23e385ddb, type: 3}
+  _prompt: {fileID: 877339351}
+  _explosion: {fileID: 90198452}
   _audio: {fileID: 963194230}
   _explosionSFX: {fileID: 8300000, guid: f835567400663714798fdbdabc79014a, type: 3}
-  _ballDestroyedSFX: {fileID: 0}
 --- !u!4 &140078213
 Transform:
   m_ObjectHideFlags: 0
@@ -5699,10 +5698,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e7f078bb3a5a36459190f073c0bb269, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  circleSprite: {fileID: 2030212984}
+  _circleSprite: {fileID: 2030212984}
   _audio: {fileID: 821880460}
-  paddleHit: {fileID: 8300000, guid: e995396c14152c9428a080e10a66196a, type: 3}
-  every5Score: {fileID: 8300000, guid: 7bbfd0c0ca9bd8042998e69095b9b342, type: 3}
+  _paddleHit: {fileID: 8300000, guid: e995396c14152c9428a080e10a66196a, type: 3}
+  _every5Score: {fileID: 8300000, guid: 7bbfd0c0ca9bd8042998e69095b9b342, type: 3}
+  _ballDestroyedSFX: {fileID: 8300000, guid: 301ae35b9d2f15a4f9f92382aa323b9f, type: 3}
 --- !u!82 &821880460
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6954,7 +6954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7aaf48011b9ea4f9b7d87fd8a40ec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCam: {fileID: 0}
+  _mainCam: {fileID: 0}
 --- !u!1 &1678536955
 GameObject:
   m_ObjectHideFlags: 0

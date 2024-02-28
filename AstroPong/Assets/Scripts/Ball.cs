@@ -8,6 +8,7 @@ public class Ball : MonoBehaviour
 
     Rigidbody2D _rb;
     float _speed = 2f;
+    bool _isBoostingComplete = false;
 
     [SerializeField] SpriteRenderer _circleSprite;
     
@@ -25,7 +26,30 @@ public class Ball : MonoBehaviour
         _audio = GetComponent<AudioSource>();
         _circleSprite = GetComponentInChildren<SpriteRenderer>();
 
+        _rb.velocity = Vector2.zero;
         StartCoroutine(WaitToStart());
+    }
+
+    void Update()
+    {
+        // Increases speed every 5 points if _score is greater than 0, 
+        // checks if speed is more than 20
+        if(GameManager._score % 5 == 0 && GameManager._score > 0 && _speed < 20f && _isBoostingComplete == false)
+        {   
+            if(this.gameObject.transform.position.y < 0)
+            {
+                // _rb.AddForce(Vector2.up * 1, ForceMode2D.Impulse);
+                _rb.velocity += new Vector2(0, _speed);
+            }
+
+            if(this.gameObject.transform.position.y > 0)
+            {
+                // _rb.AddForce(Vector2.down * 1, ForceMode2D.Impulse);
+                _rb.velocity += new Vector2(0, -_speed);
+            }
+            _isBoostingComplete = true;
+            StartCoroutine(SpeedIncrease());
+        }
     }
 
     IEnumerator ObjDestroyed()
@@ -42,6 +66,13 @@ public class Ball : MonoBehaviour
         Destroy(this.gameObject, 0.5f); // Delay before destroying object
         
         yield return null;
+    }
+
+    IEnumerator SpeedIncrease()
+    {
+        yield return new WaitUntil(() => GameManager._score !% 5 == 0);
+        _isBoostingComplete = true;
+
     }
 
     private IEnumerator WaitToStart()
@@ -79,23 +110,6 @@ public class Ball : MonoBehaviour
         if(collision.gameObject.CompareTag("Restart"))
         {
             StartCoroutine(ObjDestroyed());
-        }
-
-        // Increases speed every 5 points if _score is greater than 0, 
-        // checks if speed is more than 4
-        if(GameManager._score % 5 == 0 && GameManager._score > 0 && _speed < 4f)
-        {   
-            _speed += 0.5f;
-
-            if(transform.position.y < 0)
-            {
-                _rb.AddForce(Vector2.up * _speed, ForceMode2D.Impulse);
-            }
-
-            if(transform.position.y > 0)
-            {
-                _rb.AddForce(Vector2.down * _speed, ForceMode2D.Impulse);
-            }
-        }
+        }     
     }
 }

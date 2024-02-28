@@ -171,14 +171,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2404cce4b06f41b4883f7acb0263055, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 1
-  speed: 8
-  minSize: 0.5
-  maxSize: 1
-  maxLifeTime: 30
-  asteroidSprites:
+  _size: 1
+  _speed: 8
+  _minSize: 0.5
+  _maxSize: 1.5
+  _maxLifeTime: 30
+  _asteroidSprites:
   - {fileID: 21300000, guid: 08f5cf2205e5945ebb4be09158309f63, type: 3}
   - {fileID: 21300000, guid: c8fc3b99d6326419db3bd20db7e6228a, type: 3}
   - {fileID: 21300000, guid: 566f3d4679d974cb6aa96941f09f756a, type: 3}
   - {fileID: 21300000, guid: b86e59880896d43768b761a5fcb56955, type: 3}
-  asteroidSprite: {fileID: 0}
+  _asteroidSprite: {fileID: 0}

@@ -26,9 +26,8 @@ public class AsteroidSpawner : MonoBehaviour
         // Checks score and bool. Also checks if spawn amount is less than 5 
        if(!isDone && GameManager._score > 0 && GameManager._score % 3 == 0 && spawnAmount < 3)
        {
-            StartCoroutine(Score());
             isDone = true;
-            StartCoroutine(Waiter());
+            StartCoroutine(Score());
        }
 
        if(GameManager._playerHealth == 0)
@@ -72,14 +71,7 @@ public class AsteroidSpawner : MonoBehaviour
     {
         spawnAmount++;
         moduloScore = GameManager._score;
-        StopCoroutine(Score());
-        yield return null;
-    }
-
-    IEnumerator Waiter()
-    {
-        yield return new WaitUntil(() => GameManager._score > moduloScore); // Waiter before turning bool false again
+        yield return new WaitUntil(() => GameManager._score !% 3 == 0);
         isDone = false;
-        StopCoroutine(Waiter());
     }
 }
