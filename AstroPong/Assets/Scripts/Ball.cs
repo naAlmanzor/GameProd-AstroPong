@@ -9,7 +9,6 @@ public class Ball : MonoBehaviour
 
     Rigidbody2D rb;
     float speed = 2f;
-    MenuManager menuUI;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +28,7 @@ public class Ball : MonoBehaviour
     // Waits 1.5 seconds before starting game
     private IEnumerator WaitToStart()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitUntil(() => Input.GetKey(KeyCode.Space));
         rb.velocity = new Vector2(0, -speed);
     }
 

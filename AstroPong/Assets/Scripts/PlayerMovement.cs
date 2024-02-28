@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private Transform m_transform; // mouse transform variable
     public Camera mainCam;
+    bool isStarting = false;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +18,11 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        LookAtMouse();
+        StartCoroutine(WaitToStart());
+        if(isStarting == true)
+        {
+            LookAtMouse();
+        }
     }
 
     private void LookAtMouse()
@@ -30,5 +35,11 @@ public class PlayerMovement : MonoBehaviour
 
         //Transforms upwards
         m_transform.up = -direction * Time.deltaTime;
-    } 
+    }
+
+    IEnumerator WaitToStart()
+    {
+        yield return new WaitUntil(()=> Input.GetKeyDown(KeyCode.Space));
+        isStarting = true;
+    }
 }

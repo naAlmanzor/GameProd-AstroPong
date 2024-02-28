@@ -12,13 +12,12 @@ public class AsteroidSpawner : MonoBehaviour
     static float spawnAmount = 1; // Amount of spawns
     private bool isDone = false;
     private float moduloScore;
+    GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        // Spawns asteroids depending on the spawn rate
-        InvokeRepeating(nameof(Spawn), this.spawnRate, this.spawnRate);
-        
+        StartCoroutine(SpawnAsteroids());   
     }
 
     void Update()
@@ -30,9 +29,14 @@ public class AsteroidSpawner : MonoBehaviour
             isDone = true;
             StartCoroutine(Waiter());
        }
+
+       if(GameManager.playerHealth == 0)
+       {
+            spawnAmount = 1;
+       }
     }
 
-    private void Spawn()
+    private void Spawner()
     {
         for (int i = 0; i < spawnAmount; i++)
         {
@@ -48,6 +52,13 @@ public class AsteroidSpawner : MonoBehaviour
             asteroid.size = Random.Range(asteroid.minSize, asteroid.maxSize);
             asteroid.SetTrajectory(spawnRotation * -spawnDirection);
         }
+    }
+
+    IEnumerator SpawnAsteroids()
+    {
+        yield return new WaitUntil(() => Input.GetKey(KeyCode.Space));
+        // Spawns asteroids depending on the spawn rate
+        InvokeRepeating(nameof(Spawner), this.spawnRate, this.spawnRate);
     }
 
     IEnumerator Score()

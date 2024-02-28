@@ -6,6 +6,8 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+  bool isPressed = false; 
+
   [SerializeField]
   public TMP_Text scoreText;
   public static int score = 0;
@@ -14,6 +16,7 @@ public class GameManager : MonoBehaviour
   public Image[] playerLives;
   public Sprite fullLives;
   public Sprite emptyLives;
+  public GameObject prompt;
 
   void Update()
   {
@@ -23,6 +26,12 @@ public class GameManager : MonoBehaviour
     if (score > highScore)
     {
       highScore = score;
+    }
+
+    if(Input.GetKey(KeyCode.Space) && isPressed == false)
+    {
+      prompt.SetActive(false);
+      isPressed = true;
     }
   }
 
