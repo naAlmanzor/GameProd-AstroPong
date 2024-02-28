@@ -23,7 +23,7 @@ public class AsteroidSpawner : MonoBehaviour
     void Update()
     {
         // Checks score and bool. Also checks if spawn amount is less than 5 
-       if(!isDone && GameManager.score > 0 && GameManager.score % 3 == 0 && spawnAmount < 5)
+       if(!isDone && GameManager.score > 0 && GameManager.score % 3 == 0 && spawnAmount < 3)
        {
             StartCoroutine(Score());
             isDone = true;
