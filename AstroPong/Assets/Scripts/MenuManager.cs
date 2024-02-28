@@ -7,22 +7,22 @@ using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private Button gameBtn;
-    [SerializeField] private Button retryBtn;
-    [SerializeField] private Button mainmenuBtn;
+    [SerializeField] private Button _gameBtn;
+    [SerializeField] private Button _retryBtn;
+    [SerializeField] private Button _mainmenuBtn;
     
-    public GameObject mainMenuPnl;
-    public GameObject gameOverPnl;
-    public TMP_Text score;
-    public TMP_Text highScore;
+    public GameObject _mainMenuPnl;
+    public GameObject _gameOverPnl;
+    public TMP_Text _score;
+    public TMP_Text _highScore;
 
     void Awake()
     {
-        gameBtn.onClick.AddListener(() => SceneManager.LoadScene(1));
-        retryBtn.onClick.AddListener(() => Retry());
-        mainmenuBtn.onClick.AddListener(() => MainMenuButton());
+        _gameBtn.onClick.AddListener(() => SceneManager.LoadScene(1));
+        _retryBtn.onClick.AddListener(() => Retry());
+        _mainmenuBtn.onClick.AddListener(() => MainMenuButton());
 
-        if(GameManager.playerHealth == 0)
+        if(GameManager._playerHealth == 0)
         {
             GameOver();
         }
@@ -33,14 +33,14 @@ public class MenuManager : MonoBehaviour
     private void MainMenuButton()
     {
         ResetStats();
-        gameOverPnl.SetActive(false);
-        mainMenuPnl.SetActive(true);
+        _gameOverPnl.SetActive(false);
+        _mainMenuPnl.SetActive(true);
     }
 
     private void GameOver()
     {
-        gameOverPnl.SetActive(true);
-        mainMenuPnl.SetActive(false);
+        _gameOverPnl.SetActive(true);
+        _mainMenuPnl.SetActive(false);
     }
 
     private void Retry()
@@ -51,13 +51,13 @@ public class MenuManager : MonoBehaviour
 
     private void ResetStats()
     {
-        GameManager.score = 0;
-        GameManager.playerHealth = 3;
+        GameManager._score = 0;
+        GameManager._playerHealth = 3;
     }
 
     private void ScoreSystem()
     {
-        score.SetText(GameManager.score.ToString());
-        highScore.SetText(GameManager.highScore.ToString());
+        _score.SetText(GameManager._score.ToString());
+        _highScore.SetText(GameManager._highScore.ToString());
     }
 }

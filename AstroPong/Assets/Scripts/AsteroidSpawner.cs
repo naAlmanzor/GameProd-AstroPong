@@ -24,14 +24,14 @@ public class AsteroidSpawner : MonoBehaviour
     void Update()
     {
         // Checks score and bool. Also checks if spawn amount is less than 5 
-       if(!isDone && GameManager.score > 0 && GameManager.score % 3 == 0 && spawnAmount < 3)
+       if(!isDone && GameManager._score > 0 && GameManager._score % 3 == 0 && spawnAmount < 3)
        {
             StartCoroutine(Score());
             isDone = true;
             StartCoroutine(Waiter());
        }
 
-       if(GameManager.playerHealth == 0)
+       if(GameManager._playerHealth == 0)
        {
             spawnAmount = 1;
        }
@@ -50,7 +50,7 @@ public class AsteroidSpawner : MonoBehaviour
             Asteroid asteroid = Instantiate(this.asteroidPrefab, spawnPoint, spawnRotation);
 
             // Randomizes size ansd trajectory
-            asteroid.size = Random.Range(asteroid.minSize, asteroid.maxSize);
+            asteroid._size = Random.Range(asteroid._minSize, asteroid._maxSize);
             asteroid.SetTrajectory(spawnRotation * -spawnDirection);
         }
     }
@@ -71,14 +71,14 @@ public class AsteroidSpawner : MonoBehaviour
     IEnumerator Score()
     {
         spawnAmount++;
-        moduloScore = GameManager.score;
+        moduloScore = GameManager._score;
         StopCoroutine(Score());
         yield return null;
     }
 
     IEnumerator Waiter()
     {
-        yield return new WaitUntil(() => GameManager.score > moduloScore); // Waiter before turning bool false again
+        yield return new WaitUntil(() => GameManager._score > moduloScore); // Waiter before turning bool false again
         isDone = false;
         StopCoroutine(Waiter());
     }

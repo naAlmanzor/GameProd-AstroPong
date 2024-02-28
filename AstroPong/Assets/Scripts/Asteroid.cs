@@ -6,38 +6,38 @@ using UnityEngine;
 //NOTE: System.Numerics is removed for Vector2 lines of code to function
 public class Asteroid : MonoBehaviour
 {
-  //Set starting asteroid size
-  public float size;
-  public float speed;
-  public float minSize;
-  public float maxSize;
-  public float maxLifeTime;
+  //Set starting asteroid _size
+  public float _size;
+  public float _speed;
+  public float _minSize;
+  public float _maxSize;
+  public float _maxLifeTime;
 
-  [SerializeField] Sprite[] asteroidSprites;
-  public SpriteRenderer asteroidSprite;
-  private Rigidbody2D rb;
+  [SerializeField] Sprite[] _asteroidSprites;
+  public SpriteRenderer _asteroidSprite;
+  private Rigidbody2D _rb;
 
   void Awake()
   {
-    asteroidSprite = GetComponent<SpriteRenderer>(); 
-    rb = GetComponent<Rigidbody2D>();
+    _asteroidSprite = GetComponent<SpriteRenderer>(); 
+    _rb = GetComponent<Rigidbody2D>();
   }
 
   void Start()
   { 
-    asteroidSprite.sprite = asteroidSprites[Random.Range(0,asteroidSprites.Length)];
+    _asteroidSprite.sprite = _asteroidSprites[Random.Range(0,_asteroidSprites.Length)];
     // asteroidPolygon = asteroids[randomIndex].GetComponent<PolygonCollider2D>();
     this.transform.eulerAngles = new Vector3(0, 0, Random.value * 360f);
-    this.transform.localScale = Vector3.one * this.size;
+    this.transform.localScale = Vector3.one * this._size;
 
-    rb.mass = this.size;
+    _rb.mass = this._size;
   }
 
   public void SetTrajectory(Vector2 direction)
   {
-    rb.AddForce(direction*this.speed);
+    _rb.AddForce(direction*this._speed);
 
-    Destroy(this.gameObject, this.maxLifeTime);
+    Destroy(this.gameObject, this._maxLifeTime);
   }
 
   private void OnCollisionEnter2D(Collision2D collision)

@@ -5,21 +5,21 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Transform m_transform; // mouse transform variable
-    public Camera mainCam;
-    bool isStarting = false;
+    public Camera _mainCam;
+    bool _isStarting = false;
 
     // Start is called before the first frame update
     void Start()
     {
         m_transform = this.transform;
-        mainCam = Camera.main;
+        _mainCam = Camera.main;
     }
 
     // Update is called once per frame
     void Update()
     {
         StartCoroutine(WaitToStart());
-        if(isStarting == true)
+        if(_isStarting == true)
         {
             LookAtMouse();
         }
@@ -28,18 +28,18 @@ public class PlayerMovement : MonoBehaviour
     private void LookAtMouse()
     {
         // Converts Mouse position from screen to WorldView
-        Vector3 mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 _mousePos = _mainCam.ScreenToWorldPoint(Input.mousePosition);
         
-        //Transforms at the direction of the mouse
-        Vector2 direction = new (mousePos.x - transform.position.x, mousePos.y - transform.position.y);
+        //Transforms at the _direction of the mouse
+        Vector2 _direction = new (_mousePos.x - transform.position.x, _mousePos.y - transform.position.y);
 
         //Transforms upwards
-        m_transform.up = -direction * Time.deltaTime;
+        m_transform.up = -_direction * Time.deltaTime;
     }
 
     IEnumerator WaitToStart()
     {
         yield return new WaitUntil(()=> Input.GetKeyDown(KeyCode.Space));
-        isStarting = true;
+        _isStarting = true;
     }
 }
