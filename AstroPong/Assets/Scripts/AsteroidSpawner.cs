@@ -11,6 +11,7 @@ public class AsteroidSpawner : MonoBehaviour
     public float spawnDistance; // Distance between
     static float spawnAmount = 1; // Amount of spawns
     private bool isDone = false;
+    [SerializeField] public bool isDemoView = false;
     private float moduloScore;
     GameManager gameManager;
 
@@ -56,7 +57,13 @@ public class AsteroidSpawner : MonoBehaviour
 
     IEnumerator SpawnAsteroids()
     {
-        yield return new WaitUntil(() => Input.GetKey(KeyCode.Space));
+        // When Demo View is active
+        if(isDemoView)
+        {
+            InvokeRepeating(nameof(Spawner), this.spawnRate, this.spawnRate);
+        }
+
+        yield return new WaitUntil(() => Input.GetKey(KeyCode.Space) && !isDemoView);
         // Spawns asteroids depending on the spawn rate
         InvokeRepeating(nameof(Spawner), this.spawnRate, this.spawnRate);
     }
