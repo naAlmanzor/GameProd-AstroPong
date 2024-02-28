@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour
 {
@@ -45,28 +44,18 @@ public class Ball : MonoBehaviour
 
         if(collision.gameObject.CompareTag("Asteroid"))
         {
+            FindAnyObjectByType<GameManager>().BallDestroyed();
             Destroy(this.gameObject);
         }
 
         if(collision.gameObject.CompareTag("Restart"))
         {
-            GameManager.playerHealth-=1;
-            Debug.Log(GameManager.playerHealth);
-            Scene currentScene = SceneManager.GetActiveScene();
-            
-            if(GameManager.playerHealth != 0)
-            {
-                SceneManager.LoadScene(currentScene.buildIndex);
-            }
-            
-            else
-            {
-                SceneManager.LoadScene(0);
-            }
+            FindAnyObjectByType<GameManager>().BallDestroyed();
+            Destroy(this.gameObject);
         }
 
         // Increases speed every 5 points if score is greater than 0, 
-        // checks if speed is more than 7.5
+        // checks if speed is more than 4
         if(GameManager.score % 5 == 0 && GameManager.score > 0 && speed < 4f)
         {   
             speed += 0.5f;

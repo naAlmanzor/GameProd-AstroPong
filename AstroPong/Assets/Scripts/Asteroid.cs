@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 //NOTE: System.Numerics is removed for Vector2 lines of code to function
 public class Asteroid : MonoBehaviour
@@ -45,26 +44,14 @@ public class Asteroid : MonoBehaviour
   {
     if(collision.gameObject.CompareTag("Paddle"))
     {
+      FindAnyObjectByType<GameManager>().AsteroidDestroyed(this);
       Destroy(this.gameObject);
     }
 
     if(collision.gameObject.CompareTag("Ball"))
     {
-      GameManager.playerHealth-=1;
-      Debug.Log(GameManager.playerHealth);
-      Scene currentScene = SceneManager.GetActiveScene();
-
+      FindAnyObjectByType<GameManager>().AsteroidDestroyed(this);
       Destroy(this.gameObject);
-      
-      if(GameManager.playerHealth != 0)
-      {
-        SceneManager.LoadScene(currentScene.buildIndex);
-      }
-      
-      else
-      {
-        SceneManager.LoadScene(0);
-      }
     }
   }
 
