@@ -2295,13 +2295,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d15623c45543a4db0f73b5ebe3a796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameBtn: {fileID: 1777316097}
-  retryBtn: {fileID: 188431288}
-  mainmenuBtn: {fileID: 40292431}
-  mainMenuPnl: {fileID: 1826713020}
-  gameOverPnl: {fileID: 590433960}
-  score: {fileID: 429260626}
-  highScore: {fileID: 2044296417}
+  _gameBtn: {fileID: 1777316097}
+  _retryBtn: {fileID: 188431288}
+  _mainmenuBtn: {fileID: 40292431}
+  _QuitBtn: {fileID: 2085513638}
+  _mainMenuPnl: {fileID: 1826713020}
+  _gameOverPnl: {fileID: 590433960}
+  _score: {fileID: 429260626}
+  _highScore: {fileID: 2044296417}
 --- !u!1 &895617682
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Button _gameBtn;
     [SerializeField] private Button _retryBtn;
     [SerializeField] private Button _mainmenuBtn;
+    [SerializeField] private Button _QuitBtn;
     
     public GameObject _mainMenuPnl;
     public GameObject _gameOverPnl;
@@ -21,7 +22,11 @@ public class MenuManager : MonoBehaviour
         _gameBtn.onClick.AddListener(() => SceneManager.LoadScene(1));
         _retryBtn.onClick.AddListener(() => Retry());
         _mainmenuBtn.onClick.AddListener(() => MainMenuButton());
+        _QuitBtn.onClick.AddListener(() => Application.Quit());
+    }
 
+    void Start()
+    {
         if(GameManager._playerHealth == 0)
         {
             GameOver();
