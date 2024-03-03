@@ -8,6 +8,7 @@ TagManager:
   - Restart
   - Asteroid
   - Ball
+  - CameraShake
   layers:
   - Default
   - TransparentFX

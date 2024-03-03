@@ -17,6 +17,7 @@ public class Ball : MonoBehaviour
     public AudioClip _paddleHit;
     public AudioClip _every5Score;
     public AudioClip _ballDestroyedSFX;
+    private CameraShake shake;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,7 @@ public class Ball : MonoBehaviour
         _circleSprite = GetComponentInChildren<SpriteRenderer>();
 
         _rb.velocity = Vector2.zero;
+        shake = GameObject.FindGameObjectWithTag("CameraShake").GetComponent<CameraShake>();
         StartCoroutine(WaitToStart());
     }
 
@@ -62,6 +64,8 @@ public class Ball : MonoBehaviour
         _audio.Play(0);
         Debug.Log(_audio.clip);
         
+        shake.CamShake();
+
         FindAnyObjectByType<GameManager>().BallDestroyed(this);
         Destroy(this.gameObject, 0.5f); // Delay before destroying object
         
