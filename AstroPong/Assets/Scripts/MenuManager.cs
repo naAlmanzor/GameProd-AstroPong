@@ -6,26 +6,17 @@ using UnityEngine.UI;
 using TMPro;
 
 public class MenuManager : MonoBehaviour
-{
-    [SerializeField] private Button _gameBtn;
-    [SerializeField] private Button _retryBtn;
-    [SerializeField] private Button _mainmenuBtn;
-    [SerializeField] private Button _QuitBtn;
-    
+{    
+    [Header("Panels")]
     public GameObject _mainMenuPnl;
+    public GameObject _tutorialPnl;
     public GameObject _gameOverPnl;
+    
+    [Header("Text Scores")]
     public TMP_Text _score;
     public TMP_Text _highScore;
 
     void Awake()
-    {
-        _gameBtn.onClick.AddListener(() => SceneManager.LoadScene(1));
-        _retryBtn.onClick.AddListener(() => Retry());
-        _mainmenuBtn.onClick.AddListener(() => MainMenuButton());
-        _QuitBtn.onClick.AddListener(() => Application.Quit());
-    }
-
-    void Start()
     {
         if(GameManager._playerHealth == 0)
         {
@@ -35,20 +26,39 @@ public class MenuManager : MonoBehaviour
         ScoreSystem();
     }
 
-    private void MainMenuButton()
+    public void MainMenu()
     {
         ResetStats();
         _gameOverPnl.SetActive(false);
+        _tutorialPnl.SetActive(false);
         _mainMenuPnl.SetActive(true);
     }
 
-    private void GameOver()
+    public void StartGame()
     {
-        _gameOverPnl.SetActive(true);
+        SceneManager.LoadScene(1);
+    }
+
+    public void Tutorial()
+    {
+        _gameOverPnl.SetActive(false);
+        _tutorialPnl.SetActive(true);
         _mainMenuPnl.SetActive(false);
     }
 
-    private void Retry()
+    public void GameOver()
+    {
+        _gameOverPnl.SetActive(true);
+        _tutorialPnl.SetActive(false);
+        _mainMenuPnl.SetActive(false);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    public void Retry()
     {
         ResetStats();
         SceneManager.LoadScene(1);
